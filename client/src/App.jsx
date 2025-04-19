@@ -10,6 +10,7 @@ import MapView from './components/map';
 import Invoice from './page/invoice';
 import RegisterForm from './form/register';
 import LoginForm from './form/login';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -30,6 +31,7 @@ const App = () => {
              <Route path='/register' element={<RegisterForm />} />
              <Route path='/login' element={<LoginForm />} />
           </Routes>
+          <Toaster />
         </main>
       </div>
     </div>

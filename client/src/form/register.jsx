@@ -1,13 +1,14 @@
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { axiosInstance } from "../assets/axios";
 import {Loader } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { axiosInstance } from "../assets/axios.jsx";
 
 const RegisterForm = () => {
-  const [usernanme, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
   const queryClient = new QueryClient();
 
@@ -16,25 +17,20 @@ const RegisterForm = () => {
       const res = await axiosInstance.post("/admin/signup", data);
       return res.data;
     },
+    
     onSuccess:() =>{toast.success("admin created successfully")
     queryClient.invalidateQueries({querykey:["admin"]})
     },
     onError: (error) => {
-      if (error.response?.status === 409) {
-        toast.error("Admin already exists");
-      } else if (error.response?.status === 400) {
-        toast.error("Invalid credentials");
-      } else if (error.response?.status === 500) {
-        toast.error("Something went wrong");
-      } else {
+    
         toast.error(error.response?.data?.message || "An unexpected error occurred");
       }
-    },
+
     });
 
     const handleRegister = (e) => {
       e.preventDefault();
-      registerMutation({ usernanme, email, password });
+      registerMutation({ username, email, password, role });
     };
 
 
@@ -43,10 +39,15 @@ const RegisterForm = () => {
   return (
     <div style={styles.container}>
       <div style={styles.header}>Register</div>
-      <div onSubmit={handleRegister} style={styles.form}>
-        <input style={styles.input} type="text" placeholder="Full Name" onChange={(e) => setUsername(e.target.value)} />
-        <input style={styles.input} type="email" placeholder="example@mail.com" onChange={(e) => setEmail(e.target.value)} />
-        <input style={styles.input} type="password" placeholder="password"  onChange={(e) => setPassword(e.target.value)}/>
+      <div  style={styles.form}>
+        <input style={styles.input} type="text" placeholder="Full Name"  name="username" onChange={(e) => setUsername(e.target.value)} />
+        <input style={styles.input} type="email" placeholder="example@mail.com" name="email" onChange={(e) => setEmail(e.target.value)} />
+        <input style={styles.input} type="password" placeholder="password"  name="password" onChange={(e) => setPassword(e.target.value)}/>
+        <select style={styles.input} name="role" onChange={(e) => setRole(e.target.value)}>
+          <option value="">Select Role</option>
+          <option value="admin">admin</option>
+        </select>
+
 
         <div style={styles.checkboxContainer}>
           <input type="checkbox" id="updates" />
@@ -55,7 +56,7 @@ const RegisterForm = () => {
           </label>
         </div>
 
-        <button type="submit" disabled={isLoading} style={styles.button}>
+        <button onClick={handleRegister} type="submit" disabled={isLoading} style={styles.button}>
           {isLoading ? <Loader className='animate-spin'/> : "Register"}
           </button>
 
