@@ -1,10 +1,11 @@
 import express from "express"
-import { protectRouter } from "../middleware/auth.middleware.js";
+import { protectRoute } from "../middleware/auth.middleware.js";
+import { addTenant, getTenants } from "../controller/tenant.controller.js";
 
 const router = express.Router();
 
-router.get("/", protectRouter, getTenants)
-router.post("/", protectRouter ,postTenant);
-router.get(":/tenantId", protectRouter, getOneTenant)
+router.get("/", protectRoute, getTenants)
+router.post("/",protectRoute ,addTenant);
+// router.get(":/tenantId", protectRouter, getOneTenant)
 
 export default router;

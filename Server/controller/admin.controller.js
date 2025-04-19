@@ -30,15 +30,16 @@ export const signup = async (req, res) => {
         });
         await admin.save();
 
-        const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, { expiresIn: '3h' })
+        const token = jwt.sign( {adminId:admin._id}, process.env.JWT_SECRET,{expiresIn:"3d"})
 
-        res.cookie('jwt-admin', token, {
-             httpOnly: true, 
-             secure: true, 
-             sameSite: 'strict' 
-            });
+        res.cookie("jwt-admin", token, {
+            httpOnly: true, //prevent XSS atacks
+            maxAge: 3 * 24 * 60 * 60 * 1000,
+            sameSite: "strict",  // prevent CSRF attacks
+            secure: process.env.NODE_ENV === "production", //prevents man-in-the-middle attacks
+        })
 
-        res.status(201).json({ message: 'User created successfully' });
+        res.status(201).json({ message: 'Admin created successfully' });
 
     } catch (error) {
         console.error('Error in signup:', error.message);
@@ -64,20 +65,21 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, { expiresIn: '3h' });
-        res.cookie('jwt-admin', token, { 
-            httpOnly: true, 
-            secure: true, 
-            sameSite: 'strict' 
-        });
+        const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, {expiresIn: "3d"});
+        await res.cookie("jwt-admin", token, {
+            httpOnly: true,
+            maxAge: 3 * 24 * 60 * 60 * 1000,
+            sameSite: "strict",
+            // secure: process.env.NODE_ENV === "production",
+        }); // 3 days
 
-        // res.status(200).json({ message: 'Login successful', admin: { username: admin.username, role: admin.role } });
-        res.status(200).json({ message: 'Login successful', admin });
+        res.json({ message: "Logged in Successfully" })
     } catch (error) {
         res.status(500).json({ message: 'Error logging in', error });
     }
 }
 
 export const logout = async (req, res) => {
+    res.clearCookie('jwt-admin');
     res.status(200).json({ message: 'Logout successful' });
 }
