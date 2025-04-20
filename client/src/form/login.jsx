@@ -1,13 +1,40 @@
-import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { axiosInstance } from "../assets/axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const queryClient = useQueryClient();
+  const Navigate = useNavigate();
+
+  const { mutate: loginMutation, isLoading } = useMutation({
+    mutationFn: (adminData) =>axiosInstance.post("/admin/login", adminData),
+    onSuccess: ()=>{
+      toast.success("Login successful")
+      queryClient.invalidateQueries({queryKey:["admin"]})
+      Navigate("/")
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Something went wrong")
+    },
+  });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    loginMutation({ username, password });
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.header}>Login</div>
       <div style={styles.form}>
-        {/* <input style={styles.input} type="text" placeholder="Full Name" /> */}
-        <input style={styles.input} type="email" placeholder="Enter your email" />
-        <input style={styles.input} type="password" placeholder="Password" />
+        <input style={styles.input} type="text" placeholder="Username" name="username" onChange={(e) => setUserName(e.target.value)} required/>
+        <input style={styles.input} type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} required />
 
         <div style={styles.checkboxContainer}>
           <input type="checkbox" id="updates" />
@@ -16,7 +43,7 @@ const LoginForm = () => {
           </label>
         </div>
 
-        <button style={styles.button}>Login</button>
+        <button onClick={handleLogin} style={styles.button}>{isLoading ? <Loader className="size-5 animate-spin" />: "Login" }</button>
 
         <div style={styles.footer}>
           <p>Need an account? <a href="/register">Register</a></p>
