@@ -1,6 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "./axios.jsx";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 const AuthContext = createContext();
@@ -20,6 +22,8 @@ const logoutAdmin = async () => {
 
 export const AuthProvider = ({ children }) => {
     const queryClient = useQueryClient();
+    const Navigate = useNavigate();
+
 
   const {data: admin, isLoading, isError,} = useQuery({
     queryKey: ["currentAdmin"],
@@ -30,8 +34,9 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await logoutAdmin();
     queryClient.invalidateQueries("currentAdmin");
-    window.location.href = "/admin/login";
+    Navigate("/")
   };
+   
   
 
 

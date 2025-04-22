@@ -15,14 +15,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
 
   const menu = [
-    { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/' },
+    { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard' },
     { name: 'Charts', icon: <FaChartBar />, path: '/charts' },
     { name: 'Tables', icon: <FaTable />, path: '/tables' },
-    { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },
-    // { name: 'Calendar', icon: <FaCalendarAlt />, path: '/calendar' },
+    // { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },
     { name: 'Maps', icon: <FaMapMarkerAlt />, path: '/maps' },
     { name: 'Invoice', icon: <FaFileAlt />, path: '/invoice' },
-    // { name: 'UI Elements', icon: <FaDesktop />, path: '/ui-elements' },
   ];
 
   return (

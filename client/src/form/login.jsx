@@ -16,7 +16,7 @@ const LoginForm = () => {
     onSuccess: ()=>{
       toast.success("Login successful")
       queryClient.invalidateQueries({queryKey:["admin"]})
-      Navigate("/")
+      Navigate("/dashboard")
     },
     onError: (error) => {
       console.log(error);

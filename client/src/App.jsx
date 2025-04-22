@@ -32,8 +32,8 @@ const App = () => {
              <Route path='/charts' element={<ProtectedRoute><ReportCharts /></ProtectedRoute> } />
              <Route path='/maps' element={<ProtectedRoute><MapView /></ProtectedRoute>} />
              <Route path='/invoice' element={<ProtectedRoute><Invoice /></ProtectedRoute> }/>
-             <Route path='/register' element={<RegisterForm />} />
              <Route path='/login' element={ <LoginForm />} />
+             <Route path='/register' element={<RegisterForm />} />
              <Route path="/" element={<Home />} />
           </Routes>
           <Toaster />
@@ -44,4 +44,5 @@ const App = () => {
 };
 
 export default App;
+
 

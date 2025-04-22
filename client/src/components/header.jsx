@@ -1,6 +1,6 @@
 import { LogOut } from 'lucide-react';
 import React from 'react';
-import {  FaBars } from 'react-icons/fa';
+import {  FaBars, FaUserAltSlash } from 'react-icons/fa';
 import { useAuth } from '../assets/authContext.jsx';
 import { Link } from 'react-router-dom';
 
@@ -34,8 +34,10 @@ const {admin, logout} = useAuth();
         </button>
           </>
         ):(<>
-        <Link to="/login" className="btn btn-primary">
-        Login
+        <Link to="/"
+        className="btn btn-primary"
+        >
+        <FaUserAltSlash size={20} />
         </Link>
         </>)
         }

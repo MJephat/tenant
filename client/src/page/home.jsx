@@ -1,5 +1,6 @@
 // Hero.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -20,13 +21,13 @@ const Home = () => {
           MANAGEMENT<br/>
           FROM THE BAY
         </h1>
-        <p className="text-blue-600 text-2xl font-semibold mt-6">Login to access your dashboard</p>
+        <p className="text-blue-400 text-2xl font-semibold mt-6"><i>Login to ADMIN access your dashboard</i></p>
         <p className="text-gray-700 mt-4">
           Make your property management easy and efficient, metrics, data, visualizations aand report in here.
         </p>
-        <button className="mt-6 px-6 py-2 border border-black text-black font-medium hover:bg-black hover:text-white transition">
-          READ MORE
-        </button>
+        <Link to="/login" className="inline-block px-5 py-2 bg-blue-400 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-100">
+          Sign In
+        </Link>
       </div>
     </section>
   );

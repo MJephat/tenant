@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import {Loader } from "lucide-react";
@@ -10,6 +11,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
+  const Navigate = useNavigate();
   const queryClient = new QueryClient();
 
   const {mutate: registerMutation, isLoading}=useMutation({
@@ -17,9 +19,9 @@ const RegisterForm = () => {
       const res = await axiosInstance.post("/admin/signup", data);
       return res.data;
     },
-    
-    onSuccess:() =>{toast.success("admin created successfully")
+        onSuccess:() =>{toast.success("admin created successfully")
     queryClient.invalidateQueries({querykey:["admin"]})
+    Navigate("/login")
     },
     onError: (error) => {
     
