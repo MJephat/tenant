@@ -25,7 +25,7 @@ export const addTenant = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error adding tenant', error });
     }
-}
+};
 
 //  create a function that will get all tenants
 export const getTenants = async (req, res) => {
@@ -35,7 +35,7 @@ export const getTenants = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error fetching tenants', error });
     }
-}
+};
 
 // get tenant by id
 export const getTenant = async (req, res) => {
@@ -48,7 +48,7 @@ export const getTenant = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error fetching tenant', error });
     }
-}
+};
 
 // update tenant
 export const updateTenant = async (req, res) => {
@@ -73,4 +73,4 @@ export const deleteTenant = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error deleting tenant', error });
     }
-}
+};

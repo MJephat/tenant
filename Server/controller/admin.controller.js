@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import Admin from '../models/admin.model.js';
 import jwt from 'jsonwebtoken';
+import { get } from 'mongoose';
 
 export const signup = async (req, res) => {
     try {
@@ -66,11 +67,11 @@ export const login = async (req, res) => {
         }
 
         const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, {expiresIn: "3d"});
-        await res.cookie("jwt-admin", token, {
+        res.cookie("jwt-admin", token, {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 1000,
             sameSite: "strict",
-            // secure: process.env.NODE_ENV === "production",
+            secure: process.env.NODE_ENV === "production"
         }); // 3 days
 
         res.json({ message: "Logged in Successfully" })
@@ -82,4 +83,14 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
     res.clearCookie('jwt-admin');
     res.status(200).json({ message: 'Logout successful' });
+}
+
+export const getCurrentAdmin = async (req, res) => {
+    try {
+        res.json(req.admin);
+    } catch (error) {
+        res.error('Error fetching admins', error );
+        res.status(500).json({ message: 'Error fetching admins', error });
+    }
+
 }

@@ -12,9 +12,11 @@ const tenantSchema = new mongoose.Schema({
   name: { type: String, required: true},
   phone: { type: String},
   roomNumber: { type: String, required: true, unique: true},
-  rentAmount: { type: String },
+  rentAmount: { type: Number },
+  electricityBill: { type: Number, required: false, default: 0},
   createdAt: {type: Date, default:Date.now}
 });
 
 const Tenant = mongoose.model('Tenant', tenantSchema);
 export default Tenant;
+
