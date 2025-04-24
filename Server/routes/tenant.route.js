@@ -4,7 +4,7 @@ import { addTenant, deleteTenant, getTenant, getTenants, updateTenant } from "..
 
 const router = express.Router();
 
-router.get("/all", protectRoute, getTenants)
+router.get("/",protectRoute, getTenants)
 router.post("/",protectRoute ,addTenant);
 router.get("/:id", protectRoute, getTenant)
 router.put("/:id", protectRoute, updateTenant)
