@@ -27,7 +27,7 @@ const dataBar = [
 
 const fetchTenant = async () => {
   try {
-    const response = await axiosInstance.get("/tenant/all");
+    const response = await axiosInstance.get("/tenant");
     return response.data;
   } catch (error) {
     throw new Error("Failed to fetch tenants");

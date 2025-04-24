@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { axiosInstance } from "../../assets/axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
+import AddTenant from "../../form/addTenant";
 
 const fetchTenants = async () => {
   const response = await axiosInstance.get("/tenant");
@@ -21,6 +22,8 @@ const DataTable = () => {
   const [editRow, setEditRow] = useState(null);
   const [editData, setEditData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [showForm, setShowForm] = useState(false);
+
   const itemsPerPage = 15;
 
   const queryClient = useQueryClient();
@@ -82,16 +85,23 @@ const handleEdit = (tenant) => {
 
   return (
     <div className="bg-white p-6 rounded shadow">
-      <h2 className="text-lg font-semibold mb-4">Tenants Table</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold">Tenant Table</h2>
+        <button className="bg-green-300 text-white text-xl px-4 rounded-full"
+          onClick={() => setShowForm(true)}>
+          Add Tenant
+        </button>
+      </div>
+      {showForm && <AddTenant onClose={() => setShowForm(false)} />}
       <div className="overflow-x-auto">
         <table className="w-full mb-4">
           <thead>
             <tr>
-              <th>Tenant_No</th>
-              <th>Name</th>
-              <th>Room</th>
-              <th>Rent</th>
-              <th>Electricity</th>
+              <th>Tenant Number</th>
+              <th>Tenant Name</th>
+              <th>Room Number</th>
+              <th>Rent Amount</th>
+              <th>Electricity Bill</th>
               <th>Entry Date</th>
               <th>Action</th>
             </tr>
