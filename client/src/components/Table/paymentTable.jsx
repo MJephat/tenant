@@ -23,7 +23,7 @@ const PaymentsTable = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [editRow, setEditRow] = useState(null);
     const [editData, setEditData] = useState({});
-    const itemsPerPage = 10;
+    const itemsPerPage = 6;
 
     const queryClient = useQueryClient();
 

@@ -26,11 +26,18 @@ const DataTable = () => {
   const [editData, setEditData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [showForm, setShowForm] = useState(false);
-  
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [selectedTenantId, setSelectedTenantId] = useState(null);
+
 
   const itemsPerPage = 6;
 
   const queryClient = useQueryClient();
+
+  const handlePayClick = (tenantId) => {
+    setSelectedTenantId(tenantId);
+    setShowPaymentForm(true);
+  };
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["tenants"],
@@ -149,13 +156,27 @@ const handleEdit = (tenant) => {
                   ) : (
                     <>
                       <button onClick={() => handleEdit(tenant)} className="bg-orange-500 text-white text-xs px-3 rounded-full">Edit</button>
-                      <button className="bg-blue-500 text-white text-xs px-3 rounded-full">pay</button>
+                      <button onClick={() => handlePayClick(tenant._id)} className="bg-blue-500 text-white text-xs px-3 rounded-full">pay</button>
                       <button onClick={() => deleteMutation.mutate(tenant._id)} className="bg-red-500 text-white text-xs px-3 rounded-full">Delete</button>
                     </>
                   )}
                 </td>
               </tr>
             ))}
+                  {showPaymentForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md relative">
+            <button
+              onClick={() => setShowPaymentForm(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-black text-lg"
+            >
+              &times;
+            </button>
+            <h3 className="text-lg font-bold mb-4">Fill in Payments</h3>
+            <PaymentForm tenantId={selectedTenantId} />
+          </div>
+        </div>
+      )}
           </tbody>
         </table>
         <div className="flex justify-center items-center gap-2">

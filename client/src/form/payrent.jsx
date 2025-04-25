@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {axiosInstance} from '../assets/axios.jsx';
 import { useParams } from 'react-router-dom';
 
-const PaymentForm = () => {
+const PaymentForm = ({tenantId}) => {
     const {id} =    useParams();
     const [formData, setFormData] = useState({
         amountPaid: "",
@@ -25,7 +25,7 @@ const PaymentForm = () => {
         e.preventDefault();
 
         try{
-            await axiosInstance.post(`/payment/payrent/${id}`, formData);
+            await axiosInstance.post(`/payment/payrent/${tenantId}`, formData);
             toast.success("Payment added successfully");
             setFormData({
                 amountPaid: "",
@@ -50,7 +50,7 @@ const PaymentForm = () => {
         </select>
         <input type="text" name="paymentMonth" value={formData.paymentMonth} onChange={handleChange} placeholder='Payment Month' className='w-full p-2 border rounded' required />
         <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder='Notes' className='w-full p-2 border rounded' rows="4"></textarea>
-        <button type="submit" className='w-full p-2 bg-blue-400 text-white rounded'>Make Payment $</button>
+        <button type="submit" className='w-full p-2 bg-blue-400 text-white rounded'> submit transaction</button>
       
     </form>
   )
