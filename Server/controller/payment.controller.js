@@ -49,6 +49,7 @@ export const payRent = async (req, res) => {
         });
 
         await payment.save({ session });
+        
 
         // Update tenant payment status
         const paymentUpdate = {
@@ -56,7 +57,7 @@ export const payRent = async (req, res) => {
             'payment.electricityBill': electricityBill,
             'payment.paidBy': req.admin._id,
             'payment.paidAt': new Date(),
-            'payment.status': payment.amountPaid >= (payment.rentAmount + (payment.electricityBill || 0)) ? 'Paid' : 'Partially',
+            'payment.paymentStatus': payment.amountPaid >= (payment.rentAmount + (payment.electricityBill || 0)) ? 'Paid' : 'Partially',
             'payment.balance': payment.balance
         };
 
@@ -182,14 +183,14 @@ export const getAllPayments = async (req, res) => {
     try {
         const payments = await Payment.find()
             .populate('tenantId', 'name roomNumber')
-            .populate('paidBy', 'name');
+            .populate('paidBy', 'username');
         res.status(200).json({ payments });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching payments', error });
     }
 }
 
-// delete payment
+// get monthly payment
 export const getPaymentsByMonth = async (req, res) => {
     try {
       const data = await Payment.aggregate([
@@ -230,3 +231,19 @@ export const getPaymentsByMonth = async (req, res) => {
     }
   };
   
+
+// delete payment by id
+export const deletePayment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const payment = await Payment.findByIdAndDelete(id);
+        if (!payment) {
+            return res.status(404).json({ message: 'Payment not found' });
+        }
+        res.status(200).json({ message: 'Payment deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting payment', error });
+    }
+}
+
+

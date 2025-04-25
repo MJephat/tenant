@@ -57,6 +57,12 @@ export const updateTenant = async (req, res) => {
         if (!tenant) {
             return res.status(404).json({ message: 'Tenant not found' });
         }
+        if (req.body.roomNumber) {
+            const roomOccupied = await Tenant.findOne({ roomNumber: req.body.roomNumber, _id: { $ne: req.params.id } });
+            if (roomOccupied) {
+                return res.status(400).json({ message: 'Room is already occupied' });
+            }
+        }
         res.status(200).json({ message: 'Tenant updated successfully', tenant });
     } catch (error) {
         res.status(500).json({ message: 'Error updating tenant', error });

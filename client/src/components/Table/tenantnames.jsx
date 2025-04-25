@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../../assets/axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
+import { Loader, SkipBack, SkipForward } from "lucide-react";
 import AddTenant from "../../form/addTenant";
+import toast from "react-hot-toast";
+import PaymentsTable from "./paymentTable";
+import PaymentForm from "../../form/payrent";
 
 const fetchTenants = async () => {
   const response = await axiosInstance.get("/tenant");
@@ -23,8 +26,9 @@ const DataTable = () => {
   const [editData, setEditData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [showForm, setShowForm] = useState(false);
+  
 
-  const itemsPerPage = 15;
+  const itemsPerPage = 6;
 
   const queryClient = useQueryClient();
 
@@ -44,8 +48,11 @@ const DataTable = () => {
     mutationFn: updatedTenant,
     onSuccess: () =>{   
       queryClient.invalidateQueries({ queryKey: ["tenants"]});
-      setEditRow(null);
-    
+      toast.success("Tenant updated successfully");
+      setEditRow(null);  
+    },
+  onError: (error) => {
+      toast.error(error.response?.data?.message || "Error updating tenant", error.message);
     },
   });
 
@@ -84,10 +91,11 @@ const handleEdit = (tenant) => {
   const paginatedData = tenants.slice(start, end);
 
   return (
+    <>
     <div className="bg-white p-6 rounded shadow">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Tenant Table</h2>
-        <button className="bg-green-300 text-white text-xl px-4 rounded-full"
+        <button className="bg-green-300 text-white text-xm px-3 rounded-full"
           onClick={() => setShowForm(true)}>
           Add Tenant
         </button>
@@ -128,7 +136,7 @@ const handleEdit = (tenant) => {
                   {editRow === tenant._id ? (
                   < input type="number" name="rentAmount" value={editData.rentAmount} onChange={handleChange} className="border px-2 w-full" />
                 ) : (
-                  `Ksh. ${tenant.rentAmount?.toFixed(2)}`)}
+                  `Ksh. ${tenant.rentAmount}`)}
                   </td>
                 <td className="p-2">Ksh. {tenant.electricityBill?.toFixed(2)}</td>
                 <td className="p-2">{new Date(tenant.createdAt).toLocaleDateString("en-GB")}</td>
@@ -141,6 +149,7 @@ const handleEdit = (tenant) => {
                   ) : (
                     <>
                       <button onClick={() => handleEdit(tenant)} className="bg-orange-500 text-white text-xs px-3 rounded-full">Edit</button>
+                      <button className="bg-blue-500 text-white text-xs px-3 rounded-full">pay</button>
                       <button onClick={() => deleteMutation.mutate(tenant._id)} className="bg-red-500 text-white text-xs px-3 rounded-full">Delete</button>
                     </>
                   )}
@@ -155,7 +164,7 @@ const handleEdit = (tenant) => {
             disabled={currentPage === 1}
             className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
           >
-            Previous
+            <SkipBack className="w-4 h-4" />
           </button>
           <span>Page {currentPage} of {totalPages}</span>
           <button
@@ -163,11 +172,18 @@ const handleEdit = (tenant) => {
             disabled={currentPage === totalPages}
             className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
           >
-            Next
+            <SkipForward className="w-4 h-4" />
           </button>
         </div>
       </div>
     </div>
+    {/* payment table */}
+    <div>
+    <PaymentsTable />
+    </div>
+  
+    </>
+
   );
 };
 

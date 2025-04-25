@@ -32,13 +32,13 @@ const paymentSchema = new mongoose.Schema({
     },
     paymentType: {
         type: String,
-        enum: ['Cash', 'Bank Transfer', 'Mpesa', 'Other'],
+        enum: ['Cash', 'Bank', 'Mpesa', 'Cheque'],
         required: true
     },
     paymentStatus: {
         type: String,
         enum: ['Paid', 'Partially',],
-        default: 'Partially'
+        default: 'Partially',
     },
     paymentMonth: {
         type: Date,
