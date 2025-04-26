@@ -57,7 +57,7 @@ const Invoice = () => {
         ["Monthly Rent", `Ksh. ${payment.rentAmount}`, `Ksh. ${payment.amountPaid}`],
         ["Electricity Bill", ` `, `Ksh. ${payment.electricityBill}`],
         ["Balance" , `Ksh. ${payment.balance}`],
-        ["Total", "", `Ksh. ${payment.amountPaid + payment.electricityBill}`],
+        ["Total", "", `Ksh. ${payment.amountPaid }`],
       ],
     });
 
@@ -159,7 +159,7 @@ const Invoice = () => {
                   <td colSpan="3" style={{ textAlign: "right" }}>
                     Total
                   </td>
-                  <td>Ksh. {payment.amountPaid + payment.electricityBill}</td>
+                  <td>Ksh. {payment.amountPaid}</td>
                 </tr>
               </tbody>
             </table>
