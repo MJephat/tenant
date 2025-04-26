@@ -90,8 +90,6 @@ const handleEdit = (tenant) => {
 
 
 
-
-
   const totalPages = Math.ceil(tenants.length / itemsPerPage);
   const start = (currentPage - 1) * itemsPerPage;
   const end = start + itemsPerPage;
@@ -114,6 +112,7 @@ const handleEdit = (tenant) => {
             <tr>
               <th>Tenant Number</th>
               <th>Tenant Name</th>
+              <th>Phone Number</th>
               <th>Room Number</th>
               <th>Rent Amount</th>
               <th>Electricity Bill</th>
@@ -131,6 +130,8 @@ const handleEdit = (tenant) => {
                   ) : (
                     tenant.name
                   )}
+                </td>
+                <td className="p-2">{tenant.phone.replace(/^(\d{3})\d{4}(\d{3})$/, "$1****$2")}
                 </td>
                 <td className="p-2">
                   {editRow === tenant._id ? (
