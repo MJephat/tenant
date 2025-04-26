@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader, StepBack, StepForward } from "lucide-react";
 
 
-const fetchPayments = async () => {
+const  fetchPayments = async () => {
     const response = await axiosInstance.get("/payment");
     return response.data.payments;
 }
@@ -179,6 +179,7 @@ const PaymentsTable = () => {
                             ): (    
                             <>
                             <button onClick={() =>handleEdit(payment)}className="bg-orange-500 text-white text-xs px-3 rounded-full">Edit</button>
+                            <button className="bg-blue-500 text-white text-xs px-3 rounded-full">Invoice</button>
                             <button onClick={()=>deleteMutation.mutate(payment._id)}className="bg-red-500 text-white text-xs px-3 rounded-full">Delete</button>
                             </>
 

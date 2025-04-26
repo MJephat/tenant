@@ -19,8 +19,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { name: 'Charts', icon: <FaChartBar />, path: '/charts' },
     { name: 'Tables', icon: <FaTable />, path: '/tables' },
     // { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },
-    { name: 'Maps', icon: <FaMapMarkerAlt />, path: '/maps' },
     { name: 'Invoice', icon: <FaFileAlt />, path: '/invoice' },
+    { name: 'Maps', icon: <FaMapMarkerAlt />, path: '/maps' },
+
   ];
 
   return (
