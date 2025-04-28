@@ -23,7 +23,7 @@ const Home = () => {
         </h1>
         <p className="text-blue-400 text-2xl font-semibold mt-6"><i>Login to ADMIN access your dashboard</i></p>
         <p className="text-gray-700 mt-4">
-          Make your property management easy and efficient, metrics, data, visualizations aand report in here.
+          Make your property management easy and efficient, metrics, data, visualizations and report in here.
         </p>
         <Link to="/login" className="inline-block px-5 py-2 bg-blue-400 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-100">
           Sign In

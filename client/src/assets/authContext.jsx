@@ -37,8 +37,6 @@ export const AuthProvider = ({ children }) => {
     Navigate("/")
   };
    
-  
-
 
   return (
     <AuthContext.Provider value={{ admin, isLoading, isError, logout }}>

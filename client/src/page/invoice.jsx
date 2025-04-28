@@ -65,7 +65,7 @@ const Invoice = () => {
 
     doc.setFontSize(14);
     doc.text(
-      `Total PAID: Ksh. ${payment.amountPaid + payment.electricityBill}`,
+      `Total PAID: Ksh. ${payment.amountPaid}`,
       110,
       finalY + 10
     );
