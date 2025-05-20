@@ -16,7 +16,7 @@ const Invoice = () => {
     queryFn: fetchPayments,
   });
 
-  const payments = Array.isArray(data) ? data : [];
+  const payments = Array.isArray(data) ? [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
 
   if (isLoading) {
     return (

@@ -1,6 +1,6 @@
 import express from 'express';
 import { protectRoute } from '../middleware/auth.middleware.js';
-import { deletePayment, editPayment, getAllPaidTenants, getAllPayments, getMonthlyPaymentSummary, getPaymentHistory, getPaymentsByMonth, payRent } from '../controller/payment.controller.js';
+import { deletePayment, editPayment, getAllPaidTenants, getAllPayments, getPaymentHistory, getPaymentsByMonth, payRent } from '../controller/payment.controller.js';
 
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.post("/payrent/:id", protectRoute, payRent)
 router.get("/paidtenant",protectRoute, getAllPaidTenants)
 router.get("/history/:id", protectRoute, getPaymentHistory)
 router.put("/editpayment/:id", protectRoute, editPayment)
-router.get("/monthlysummary", protectRoute, getMonthlyPaymentSummary)
+router.get("/monthlysummary/:id", protectRoute, getPaymentHistory)
 router.get("/summary", protectRoute, getPaymentsByMonth)
 router.delete("/:id", protectRoute, deletePayment)
 

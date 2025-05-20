@@ -50,7 +50,8 @@ export const payRent = async (req, res) => {
 
         await payment.save({ session });
         
-
+        // const month = 1;
+        // const year = 2025;
         // Update tenant payment status
         const paymentUpdate = {
             'payment.amountPaid': amountPaid,
@@ -97,6 +98,7 @@ export const getPaymentHistory = async (req, res) => {
         res.status(500).json({ message: 'Error fetching payment history', error });
     }
 }
+
 
 //function to edit payment details
 export const editPayment = async (req, res) => {
