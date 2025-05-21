@@ -13,6 +13,7 @@ import LoginForm from './form/login';
 import  { Toaster } from 'react-hot-toast';
 import ProtectedRoute from './assets/protectedRoute.jsx';
 import Home from './page/home.jsx';
+import HouseCardGrid from './components/history.jsx';
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -32,6 +33,7 @@ const App = () => {
              <Route path='/charts' element={<ProtectedRoute><ReportCharts /></ProtectedRoute> } />
              <Route path='/maps' element={<ProtectedRoute><MapView /></ProtectedRoute>} />
              <Route path='/invoice' element={<ProtectedRoute><Invoice /></ProtectedRoute> }/>
+              <Route path='/statistics' element={<ProtectedRoute><HouseCardGrid /></ProtectedRoute>} />
              <Route path='/login' element={ <LoginForm />} />
              <Route path='/register' element={<RegisterForm />} />
              <Route path="/" element={<Home />} />

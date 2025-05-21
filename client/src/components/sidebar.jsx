@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
   FaFileAlt,
   FaDesktop,
+  FaBitcoin,
 } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard' },
     { name: 'Charts', icon: <FaChartBar />, path: '/charts' },
     { name: 'Tables', icon: <FaTable />, path: '/tables' },
+    {name: 'Statistics', icon: <FaBitcoin />, path: '/statistics'},
     // { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },
     { name: 'Invoice', icon: <FaFileAlt />, path: '/invoice' },
     { name: 'Maps', icon: <FaMapMarkerAlt />, path: '/maps' },
