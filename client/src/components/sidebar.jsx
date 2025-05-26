@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   const menu = [
     { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard' },
-    { name: 'Charts', icon: <FaChartBar />, path: '/charts' },
+    // { name: 'Charts', icon: <FaChartBar />, path: '/charts' },
     { name: 'Tables', icon: <FaTable />, path: '/tables' },
     {name: 'Statistics', icon: <FaBitcoin />, path: '/statistics'},
     // { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },

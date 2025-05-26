@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { axiosInstance } from "../assets/axios";
 import { Loader } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+
 
 // Fetch tenants from backend
 const fetchTenants = async () => {
@@ -16,7 +18,7 @@ const fetchSummary = async ({ queryKey }) => {
     return response.data.payments;
   };
 
-const FullscreenTable = ({ tenantId, roomNumber, onClose }) => {
+const FullscreenTable = ({ tenantId, roomNumber,name, onClose }) => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["summary", tenantId],
     queryFn: fetchSummary,
@@ -39,11 +41,12 @@ const FullscreenTable = ({ tenantId, roomNumber, onClose }) => {
   return (
     <div className="bg-white p-6 rounded shadow">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">{roomNumber} - Payment Summary</h2>
+        <h2 className="text-2xl font-semibold">{roomNumber}, { name} - Payment Summary</h2>
         <button onClick={onClose} className="bg-red-500 text-white px-4 py-2 rounded">
           Close
         </button>
       </div>
+  
 
       <div className="overflow-x-auto">
         <table className="w-full mb-4">
@@ -80,16 +83,46 @@ const FullscreenTable = ({ tenantId, roomNumber, onClose }) => {
           </tbody>
         </table>
       </div>
+          <div className="h-96 mb-6">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={summary.reverse()}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="paymentMonth"
+                  tickFormatter={(value) =>
+                    new Date(value).toLocaleDateString("en-US", {
+                      month: "short",
+                      year: "2-digit",
+                    })
+                  }
+                />
+                <YAxis />
+                <Tooltip
+                  labelFormatter={(value) =>
+                    new Date(value).toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })
+                  }
+                />
+                <Legend />
+                <Bar dataKey="rentAmount" fill="#A9A9A9" name="Rent" />
+                <Bar dataKey="electricityBill" fill="#00C0EF" name="Electricity" />
+                <Bar dataKey="amountPaid" fill="#90EE90" name="Paid" />
+                <Bar dataKey="balance" fill="#FFBB28" name="Balance" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
     </div>
   );
 };
 
-const HouseCard = ({ roomNumber, onClick }) => (
+const HouseCard = ({ roomNumber, name, onClick }) => (
   <div
     className="w-60 h-40 bg-gradient-to-br from-gray-300 via-gray-400 to-blue-200 text-white flex items-center justify-center text-2xl rounded-xl shadow-md cursor-pointer hover:scale-105 transition"
     onClick={onClick}
   >
-    {roomNumber}
+    {roomNumber} - {name}
   </div>
 );
 
@@ -115,11 +148,12 @@ const HouseCardGrid = () => {
   return (
     <div className="rounded-xl p-4 text-black shadow-md flex flex-col justify-between">
       <div className="flex flex-wrap gap-4">
-        {tenants.map(({ _id, roomNumber}) => (
+        {tenants.map(({ _id, roomNumber, name}) => (
           <HouseCard
             key={_id}
             roomNumber={roomNumber}
-            onClick={() => setSelectedTenant({ roomNumber: roomNumber, tenantId: _id })}
+            name={name}
+            onClick={() => setSelectedTenant({ roomNumber: roomNumber,name: name, tenantId: _id })}
           />
         ))}
       </div>
@@ -128,6 +162,7 @@ const HouseCardGrid = () => {
         <FullscreenTable
           tenantId={selectedTenant.tenantId}
           roomNumber={selectedTenant.roomNumber}
+          name={selectedTenant.name}
           onClose={() => setSelectedTenant(null)}
         />
       )}
