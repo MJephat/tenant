@@ -17,7 +17,7 @@ const MapView = () => {
     const position = [-1.2546, 36.8936]; //Nairobi, Kenya
 
   return (
-    <div className="w-full h-[400px] rounded-xl shadow overflow-hidden grid grid-cols-1 gap-6" >
+    <div className="w-full h-[100vh] rounded-xl shadow overflow-hidden grid grid-cols-1 gap-6" >
       <MapContainer center={position} zoom={10} scrollWheelZoom={true} className="h-full w-full">
         <TileLayer
           attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'

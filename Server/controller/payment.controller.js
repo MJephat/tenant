@@ -92,10 +92,21 @@ export const payRent = async (req, res) => {
 export const getPaymentHistory = async (req, res) => {
     try {
         const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid tenant ID' });
+        }
+
         const payments = await Payment.getPaymentHistory(id);
+
+        if (!payments || payments.length === 0) {
+            return res.status(200).json({ payments: [] });
+        }
+
         res.status(200).json({ payments });
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching payment history', error });
+        console.error("Error in getPaymentHistory:", error);
+        res.status(500).json({ message: 'Error fetching payment history', error: error.message });
     }
 }
 

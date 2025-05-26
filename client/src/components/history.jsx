@@ -75,7 +75,11 @@ const FullscreenTable = ({ tenantId, roomNumber,name, onClose }) => {
                 <td className="p-2">{entry.electricityBill}</td>
                 <td className="p-2">{entry.amountPaid}</td>
                 <td className="p-2">{entry.balance}</td>
-                <td className="p-2">{entry.paymentStatus}</td>
+                <td className="p-2">
+                  <span className={`font-semibold ${entry.balance > 1 ? "text-yellow-500" : "text-green-500"}`}>
+                    {entry.balance > 1 ? "Partially" : "Paid"}
+                  </span>
+                </td>
                 <td className="p-2">{entry.notes}</td>
                 <td className="p-2">{entry.transactionId}</td>
               </tr>

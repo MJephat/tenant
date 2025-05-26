@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OverviewCards from '../components/statCard';
 import ReportCharts from '../components/Chart';
-import MapView from '../components/map';
+// import CalendarComponent from '../components/calender';
 
 const Dashboard = () => {
 
@@ -12,7 +12,7 @@ const Dashboard = () => {
         <main className="p-4 overflow-y-auto ">
           <OverviewCards/>
           <ReportCharts />
-          <MapView />
+          {/* <CalendarComponent /> */}
         </main>
       </div>
     </div>
