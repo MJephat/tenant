@@ -38,6 +38,7 @@ const FullscreenTable = ({ tenantId, roomNumber,name, onClose }) => {
 
   const summary = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+  
   return (
     <div className="bg-white p-6 rounded shadow">
       <div className="flex justify-between items-center mb-4">

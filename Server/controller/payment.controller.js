@@ -110,6 +110,33 @@ export const getPaymentHistory = async (req, res) => {
     }
 }
 
+// function to get history for a tenant using name
+export const getTenantPaymentHistoryByName = async (req, res) => {
+    try {
+        const { name } = req.query;
+
+        if (!name) {
+            return res.status(400).json({ message: 'Tenant name is required' });
+        }
+
+        const tenant = await Tenant.findOne({ name: new RegExp(`^${name}$`, 'i')});
+        if (!tenant) {
+            return res.status(404).json({ message: 'Tenant not found' });
+        }
+
+        const payments = await Payment.getPaymentHistory(tenant._id);
+
+        if (!payments || payments.length === 0) {
+            return res.status(200).json({ payments: [] });
+        }
+
+        res.status(200).json({ payments });
+    } catch (error) {
+        console.error("Error in getTenantPaymentHistoryByName:", error);
+        res.status(500).json({ message: 'Error fetching payment history by tenant name', error: error.message });
+    }
+}
+
 
 //function to edit payment details
 export const editPayment = async (req, res) => {
