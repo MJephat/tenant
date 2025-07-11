@@ -7,11 +7,11 @@ const Home = () => {
     <section className="  relative h-screen w-full flex items-center justify-start bg-gradient-to-tr from-blue-100 to-white">
       {/* Background image on the right */}
       <div className="absolute right-0 top-0 h-full w-1/2">
-        <img
-          src="../../src/assets/hero.png" // Replace with actual image path
-          alt="Luxury Villa"
+        {/* <img
+         src="../../src/assets/hero.png"
+         alt="Luxury Villa"
           className="object-cover h-screen w-full"
-        />
+        /> */}
       </div>
 
       {/* Text content */}
