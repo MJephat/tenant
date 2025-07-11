@@ -70,8 +70,9 @@ export const login = async (req, res) => {
         res.cookie("jwt-admin", token, {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 1000,
-            sameSite: "strict",
-            secure: process.env.NODE_ENV === "production"
+            sameSite: "None",
+            secure: true
+            // secure: process.env.NODE_ENV === "production"
         }); // 3 days
 
         res.json({ message: "Logged in Successfully" })
