@@ -9,14 +9,15 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const queryClient = useQueryClient();
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { mutate: loginMutation, isLoading } = useMutation({
     mutationFn: (adminData) =>axiosInstance.post("/admin/login", adminData),
     onSuccess: ()=>{
+      console.log("Login success triggered");
       toast.success("Login successful")
       queryClient.invalidateQueries({queryKey:["admin"]})
-      Navigate("/dashboard")
+      navigate("/dashboard")
     },
     onError: (error) => {
       console.log(error);
