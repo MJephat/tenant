@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     // { name: 'Forms', icon: <FaCheckSquare />, path: '/register' },
     { name: 'Invoice', icon: <FaFileAlt />, path: '/invoice' },
     { name: 'Maps', icon: <FaMapMarkerAlt />, path: '/maps' },
-    { name: 'UI Elements', icon: <FaDesktop />, path: '/tenantDashboard' },
+    // { name: 'UI Elements', icon: <FaDesktop />, path: '/tenantDashboard' },
 
   ];
 
