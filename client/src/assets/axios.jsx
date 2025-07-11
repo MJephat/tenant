@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-    // baseURL: "http://localhost:3000/api/v1",
-    baseURL: "https://tenant-backend-t7pg.onrender.com/",
+    baseURL: "http://localhost:3000/api/v1",
+    // baseURL: "https://tenant-backend-t7pg.onrender.com/",
     withCredentials: true,
   });
   
