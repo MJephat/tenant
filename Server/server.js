@@ -22,7 +22,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/v1/admin", authRoutes);
+app.use("/admin", authRoutes);
 app.use("/api/v1/tenant", tenantRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 
