@@ -12,7 +12,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const { mutate: loginMutation, isLoading } = useMutation({
-    mutationFn: (adminData) =>axiosInstance.post("/api/v1/admin/login", adminData),
+    mutationFn: (adminData) =>axiosInstance.post("/admin/login", adminData),
     onSuccess: ()=>{
       console.log("Login success triggered");
       toast.success("Login successful")
