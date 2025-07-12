@@ -71,8 +71,7 @@ export const login = async (req, res) => {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 1000,
             sameSite: "None",
-            secure: true
-            // secure: process.env.NODE_ENV === "production"
+            secure: process.env.NODE_ENV === "production"
         }); // 3 days
 
         res.json({ message: "Logged in Successfully" })
