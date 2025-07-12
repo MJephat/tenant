@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './assets/authContext.jsx';
+import "../src/style.css";
 
 const queryClient = new QueryClient();
 
