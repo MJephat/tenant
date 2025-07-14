@@ -4,9 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "build": "cd client && npm install && npm run build"
+    "dev": "nodemon server/server.js",
+    "build": "npm install --legacy-peer-deps && cd client && npm install --legacy-peer-deps && npm run build"
   },
   "author": "",
   "license": "ISC",
