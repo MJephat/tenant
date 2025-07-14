@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001
 connectDB();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://tenant-aa3z.onrender.com"],
     credentials: true,           
   }));
 
