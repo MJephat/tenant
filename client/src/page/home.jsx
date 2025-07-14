@@ -8,7 +8,7 @@ const Home = () => {
       {/* Background image on the right */}
       <div className="absolute right-0 top-0 h-full w-1/2">
        <img
-         src="../../src/assets/hero.png"
+         src="client/src/assets/hero.png"
          alt="Luxury Villa"
           className="object-cover h-screen w-full"
         /> *
