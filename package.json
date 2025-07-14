@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon Server/server.js",
-    "dev": "nodemon Server/server.js",
-    "build": "npm install --legacy-peer-deps && npm install --legacy-peer-deps --prefix client && npm run build --prefix client"
+    "dev": "nodemon Server/server.js"
   },
   "author": "",
   "type": "module",
