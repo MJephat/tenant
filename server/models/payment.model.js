@@ -68,7 +68,7 @@ paymentSchema.methods.calculateBalance = function() {
 // Pre-save middleware to update balance
 paymentSchema.pre('save', function(next) {
     this.balance = this.calculateBalance();
-    next();
+    
 });
 
 // Static method to get payment history for a tenant

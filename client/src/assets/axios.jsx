@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const axiosInstance = axios.create({
     baseURL: "https://tenant-aa3z.onrender.com/api/v1",
+    // baseURL: "http://localhost:3000/api/v1",
     withCredentials: true,
   });
   
