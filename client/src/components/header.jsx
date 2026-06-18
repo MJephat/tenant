@@ -39,7 +39,7 @@ const {admin, logout} = useAuth();
   return (
     <>
     <header className="bg-white shadow px-4 md:px-6 py-3 flex justify-between items-center">
-      <div onClick={hansleSearch} className="flex items-center gap-4 w-full md:max-w-xl">
+      {/* <div onClick={hansleSearch} className="flex items-center gap-4 w-full md:max-w-xl">
         <button onClick={toggleSidebar} className="text-gray-700 text-2xl md:hidden">
           <FaBars />
         </button>
@@ -48,7 +48,7 @@ const {admin, logout} = useAuth();
         onKeyDown={(e) => e.key === 'Enter' && hansleSearch(e)}
           className="w-full p-2 rounded-l-md border text-gray-700 border-gray-300"
         />
-      </div>
+      </div> */}
     
 
       {/* Right: Icons and Profile */}
