@@ -34,8 +34,10 @@ const PaymentForm = ({tenantId}) => {
                 paymentMonth: "",
                 notes: "",
             });
+
+        
         }catch(err){
-            toast.error(err.response.data.message || "Error while making payment");
+            toast.error(err.response?.data?.message || "Error while making payment");
         }
     };
   return (

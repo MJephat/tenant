@@ -66,9 +66,8 @@ paymentSchema.methods.calculateBalance = function() {
 };
 
 // Pre-save middleware to update balance
-paymentSchema.pre('save', function(next) {
+paymentSchema.pre('save', function() {
     this.balance = this.calculateBalance();
-    
 });
 
 // Static method to get payment history for a tenant

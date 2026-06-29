@@ -120,6 +120,7 @@ const handleEdit = (tenant) => {
               <th>Action</th>
             </tr>
           </thead>
+
           <tbody>
             {paginatedData.map((tenant) => (
               <tr key={tenant._id} className="border-b hover:bg-gray-50">
@@ -164,22 +165,13 @@ const handleEdit = (tenant) => {
                 </td>
               </tr>
             ))}
-                  {showPaymentForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md relative">
-            <button
-              onClick={() => setShowPaymentForm(false)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-black text-lg"
-            >
-              &times;
-            </button>
-            <h3 className="text-lg font-bold mb-4">Fill in Payments</h3>
-            <PaymentForm tenantId={selectedTenantId} />
-          </div>
-        </div>
-      )}
+  
+      
           </tbody>
         </table>
+
+   
+
         <div className="flex justify-center items-center gap-2">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -203,6 +195,22 @@ const handleEdit = (tenant) => {
     <div>
     <PaymentsTable />
     </div>
+
+           {showPaymentForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md relative">
+            <button
+              onClick={() => setShowPaymentForm(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-black text-lg"
+            >
+              &times;
+            </button>
+            <h3 className="text-lg font-bold mb-4">Fill in Payments</h3>
+            <PaymentForm tenantId={selectedTenantId} />
+          </div>
+        </div>
+      )}
+
   
     </>
 

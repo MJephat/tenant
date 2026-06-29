@@ -14,8 +14,12 @@ export const getAllPaidTenants = async (req, res) => {
 
 // function for a tenant to pay rent that will be done by the admin in the admin dashboard
 export const payRent = async (req, res) => {
+
+    console.log("1");
     const session = await mongoose.startSession();
+        console.log("2");
     session.startTransaction();
+        console.log("3");
 
     try {
         if (!req.admin || req.admin.role !== 'admin') {
@@ -32,6 +36,8 @@ export const payRent = async (req, res) => {
         } = req.body;
 
         const tenant = await Tenant.findById(id).session(session);
+            console.log("4");
+
         if (!tenant) {
             return res.status(404).json({ message: 'Tenant not found' });
         }
@@ -49,7 +55,8 @@ export const payRent = async (req, res) => {
         });
 
         await payment.save({ session });
-        
+            console.log("5");
+
         // const month = 1;
         // const year = 2025;
         // Update tenant payment status
@@ -61,6 +68,8 @@ export const payRent = async (req, res) => {
             'payment.paymentStatus': payment.amountPaid >= (payment.rentAmount + (payment.electricityBill || 0)) ? 'Paid' : 'Partially',
             'payment.balance': payment.balance
         };
+            console.log("6");
+
 
         const updatedTenant = await Tenant.findByIdAndUpdate(
             id,
@@ -69,6 +78,7 @@ export const payRent = async (req, res) => {
         );
 
         await session.commitTransaction();
+    console.log("7");
 
         res.status(200).json({
             message: 'Payment processed successfully',
